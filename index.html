@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <title>Mi Glosario de Programación</title>
   <link rel="stylesheet" href="estilo.css">
 </head>
-
 <body>
   <!-- PANTALLA DE ACCESO (Esto es lo único que se ve al cargar la página) -->
   <section id="pantalla-login" class="seccion-login">
@@ -38,7 +36,6 @@
         <input type="search" id="input-busqueda" placeholder="¿Qué quieres hacer? Ej: cambiar color..." required>
         <button type="submit">Buscar</button>
       </form>
-
       <!-- Aquí se pintan los resultados -->
       <div id="contenedor-resultados"></div>
     </section>
@@ -65,12 +62,11 @@
         document.getElementById('clave-acceso').value = "";
       }
     });
-    // 2. FUNCIÓN ASÍNCRONA PARA OBTENER TODAS LAS NOTAS (.json + localStorage)
+    // 2. FUNCIÓN
     async function obtenerTodasLasNotas() {
       try {
         const respuesta = await fetch('notas.json');
         const notasPredeterminadas = await respuesta.json();
-
         const notasCreadas = JSON.parse(localStorage.getItem('misNotasCreadas')) || [];
         return [...notasPredeterminadas, ...notasCreadas];
       } catch (error) {
@@ -79,7 +75,7 @@
       }
     }
     // 3. LÓGICA PARA GUARDAR UNA NUEVA NOTA
-    document.getElementById('formulario-guardar').addEventListener('submit', function (event) {
+      document.getElementById('formulario-guardar').addEventListener('submit', function (event) {
       event.preventDefault();
       const titulo = document.getElementById('nuevo-titulo').value.trim();
       const descripcion = document.getElementById('nueva-descripcion').value.trim();
@@ -97,7 +93,7 @@
       alert('¡Apunte guardado con éxito!');
     });
     // 4. LÓGICA DEL BUSCADOR
-    document.getElementById('buscador-notas').addEventListener('submit', async function (event) {
+      document.getElementById('buscador-notas').addEventListener('submit', async function (event) {
 
       event.preventDefault();
       const textoUsuario = document.getElementById('input-busqueda').value.toLowerCase().trim();
@@ -105,19 +101,15 @@
 
       // Limpiar los resultados de la búsqueda anterior
       contenedor.innerHTML = "";
-
       const todasLasNotas = await obtenerTodasLasNotas();
-
       // Filtrado de las notas
-      const resultadosFiltrados = todasLasNotas.filter(nota => {
+        const resultadosFiltrados = todasLasNotas.filter(nota => {
         const tituloNota = nota.titulo ? nota.titulo.toLowerCase() : "";
         const descNota = nota.descripcion ? nota.descripcion.toLowerCase() : "";
-
         return tituloNota.includes(textoUsuario) ||
           descNota.includes(textoUsuario) ||
           nota.keys.some(key => textoUsuario.includes(key) || key.includes(textoUsuario));
       });
-
       // Si no hay resultados
       if (resultadosFiltrados.length === 0) {
         contenedor.innerHTML = "<p class='sin-resultados'>No se encontraron métodos relacionados.</p>";
@@ -127,20 +119,16 @@
       resultadosFiltrados.forEach(nota => {
         const elementoNota = document.createElement('div');
         elementoNota.classList.add('resultado-item');
-
         const tituloNota = document.createElement('h3');
         tituloNota.textContent = nota.titulo;
         elementoNota.appendChild(tituloNota);
-
         const descNota = document.createElement('p');
         descNota.textContent = nota.descripcion || 'Sin descripción disponible';
         descNota.style.whiteSpace = "pre-wrap";
         elementoNota.appendChild(descNota);
-
         const keysNota = document.createElement('small');
         keysNota.textContent = `Etiquetas: ${nota.keys.join(', ')}`;
         elementoNota.appendChild(keysNota);
-
         contenedor.appendChild(elementoNota);
       });
     });
@@ -148,11 +136,8 @@
     document.getElementById('btn-exportar').addEventListener('click', async function () {
       // Obtenemos la lista
       const todasLasNotas = await obtenerTodasLasNotas();
-
       // Conversión
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(todasLasNotas, null, 2));
-
-
       const descargarAncla = document.createElement('a');
       descargarAncla.setAttribute("href", dataStr);
       descargarAncla.setAttribute("download", "notas.json");
@@ -162,5 +147,4 @@
     });
   </script>
 </body>
-
 </html>
