@@ -156,7 +156,7 @@
       "css",
       "pseudoclase"
     ]
-  }
+  },
   {
     "titulo": "font-family",
     "descripcion": "Cambia la fuente de las letras.",
@@ -165,7 +165,138 @@
       "estilo",
       "fuente",
       "css",
-      "pseudoclase"
+      "tipografia"
+    ]
+  },
+  {
+    "titulo": "Selectores CSS básicos",
+    "descripcion": "Seleccionan los elementos HTML a los que se aplicarán las reglas. Por ejemplo, p selecciona todos los párrafos, .tarjeta selecciona los elementos con class=\"tarjeta\" y #principal selecciona el elemento con id=\"principal\".",
+    "keys": [
+      "selector",
+      "clase",
+      "id",
+      "elemento",
+      "css"
+    ]
+  },
+  {
+    "titulo": "Propiedad 'background-color' en CSS",
+    "descripcion": "Define el color de fondo de un elemento. Ejemplo: background-color: orange;",
+    "keys": [
+      "fondo",
+      "color de fondo",
+      "background",
+      "css"
+    ]
+  },
+  {
+    "titulo": "Propiedad 'font-size' en CSS",
+    "descripcion": "Controla el tamaño del texto. Puedes usar unidades como px, rem o em. Ejemplo: font-size: 1.2rem;",
+    "keys": [
+      "texto",
+      "tamano",
+      "letra",
+      "fuente",
+      "css"
+    ]
+  },
+  {
+    "titulo": "Propiedad 'text-align' en CSS",
+    "descripcion": "Alinea horizontalmente el texto dentro de un elemento. Valores comunes: left, center y right. Ejemplo: text-align: center;",
+    "keys": [
+      "alinear",
+      "centrar texto",
+      "texto",
+      "css"
+    ]
+  },
+  {
+    "titulo": "Propiedades 'margin' y 'padding' en CSS",
+    "descripcion": "margin define el espacio exterior alrededor de un elemento; padding define el espacio interior entre el contenido y el borde. Ejemplos: margin: 16px; padding: 8px 12px;",
+    "keys": [
+      "espacio",
+      "margen",
+      "relleno",
+      "separacion",
+      "css"
+    ]
+  },
+  {
+    "titulo": "Propiedad 'border' en CSS",
+    "descripcion": "Añade un borde indicando grosor, estilo y color. Ejemplo: border: 1px solid #333;",
+    "keys": [
+      "borde",
+      "contorno",
+      "linea",
+      "css"
+    ]
+  },
+  {
+    "titulo": "Propiedad 'border-radius' en CSS",
+    "descripcion": "Redondea las esquinas de un elemento. Ejemplo: border-radius: 8px; Usa 50% para crear una forma circular en un elemento cuadrado.",
+    "keys": [
+      "borde",
+      "esquinas",
+      "redondear",
+      "circulo",
+      "css"
+    ]
+  },
+  {
+    "titulo": "Propiedades 'width' y 'height' en CSS",
+    "descripcion": "Establecen el ancho (width) y el alto (height) de un elemento. Ejemplo: width: 100%; height: 200px;",
+    "keys": [
+      "ancho",
+      "alto",
+      "tamano",
+      "dimension",
+      "css"
+    ]
+  },
+  {
+    "titulo": "Propiedad 'display' en CSS",
+    "descripcion": "Controla cómo participa un elemento en el diseño. Valores básicos: block, inline, inline-block, none, flex y grid. Ejemplo: display: flex;",
+    "keys": [
+      "mostrar",
+      "ocultar",
+      "bloque",
+      "flex",
+      "css"
+    ]
+  },
+  {
+    "titulo": "Flexbox: centrar y distribuir elementos",
+    "descripcion": "Activa el diseño flexible con display: flex. Usa justify-content para distribuir elementos en el eje principal, align-items para alinearlos en el eje cruzado y gap para separarlos. Ejemplo: display: flex; justify-content: center; align-items: center; gap: 12px;",
+    "keys": [
+      "flexbox",
+      "flex",
+      "centrar",
+      "alinear",
+      "distribuir",
+      "gap",
+      "css"
+    ]
+  },
+  {
+    "titulo": "Pseudoclase ':hover' en CSS",
+    "descripcion": "Aplica estilos cuando el puntero pasa sobre un elemento. Ejemplo: button:hover { background-color: orange; }",
+    "keys": [
+      "hover",
+      "raton",
+      "interaccion",
+      "boton",
+      "css"
+    ]
+  },
+  {
+    "titulo": "Propiedad 'box-sizing' en CSS",
+    "descripcion": "Con box-sizing: border-box, el ancho y alto definidos incluyen el padding y el borde, facilitando el control del tamaño final. Ejemplo: * { box-sizing: border-box; }",
+    "keys": [
+      "modelo de caja",
+      "box model",
+      "tamano",
+      "padding",
+      "css"
     ]
   }
 ]

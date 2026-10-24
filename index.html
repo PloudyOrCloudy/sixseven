@@ -6,6 +6,13 @@
   <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
+  <div class="fondo-halloween" aria-hidden="true"></div>
+  <div class="calabazas-decorativas calabazas-izquierda" aria-hidden="true">
+    <span>🎃</span><span>🎃</span><span>🎃</span><span>🎃</span>
+  </div>
+  <div class="calabazas-decorativas calabazas-derecha" aria-hidden="true">
+    <span>🎃</span><span>🎃</span><span>🎃</span><span>🎃</span>
+  </div>
   <!-- PANTALLA DE ACCESO (Esto es lo único que se ve al cargar la página) -->
   <section id="pantalla-login" class="seccion-login">
     <h2>Dame la contraseña pookieee, I LOV: </h2>
@@ -15,9 +22,9 @@
     </form>
     <p id="mensaje-error" style="color: red; display: none;">Calabaza incorrecta 😭</p>
   </section>
-  <!-- TODO EL CONTENIDO PROTEGIDO SE ENCAPSULA AQUÍ DENTRO -->
+
   <main id="contenido-protegido" style="display: none;">
-    <!-- SECCIÓN 1: FORMULARIO PARA AÑADIR NOTAS  -->
+    <!-- AÑADIR NOTAS  -->
     <section class="seccion-formulario">
       <h2>Añadir Nuevo Apunte</h2>
       <form id="formulario-guardar">
@@ -29,20 +36,19 @@
       </form>
     </section>
     <hr>
-    <!-- SECCIÓN 2: BUSCADOR -->
+    <!-- BUSCADOR -->
     <section class="seccion-buscador">
       <h2>Buscador de Métodos</h2>
       <form id="buscador-notas" class="search-box">
-        <input type="search" id="input-busqueda" placeholder="¿Qué quieres hacer? Ej: cambiar color..." required>
+        <input type="search" id="input-busqueda" placeholder="Ej: centrar texto, cambiar color..." required>
         <button type="submit">Buscar</button>
       </form>
-      <!-- Aquí se pintan los resultados -->
-      <div id="contenedor-resultados"></div>
+      <div id="contenedor-resultados" aria-live="polite"></div>
     </section>
     <section>
       <button id="btn-exportar"
         style="background-color: #ff9800; color: white; border: none; padding: 10px; font-weight: bold; cursor: pointer; border-radius: 4px; margin-top: 10px; width: 100%;">
-        Exportar todas las notas a un archivo .json
+        Exportar mis notas guardadas a un archivo .json
       </button>
       <p class="ayuda-buscador">Para ver las notas de un lenguaje en concreto, escribe su nombre en el buscador (por ejemplo, css).</p>
     </section>
@@ -75,6 +81,13 @@
         return JSON.parse(localStorage.getItem('misNotasCreadas')) || [];
       }
     }
+    function normalizarTexto(texto) {
+      return String(texto || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
+    }
     // 3. LÓGICA PARA GUARDAR UNA NUEVA NOTA
       document.getElementById('formulario-guardar').addEventListener('submit', function (event) {
       event.preventDefault();
@@ -97,27 +110,50 @@
       document.getElementById('buscador-notas').addEventListener('submit', async function (event) {
 
       event.preventDefault();
-      const textoUsuario = document.getElementById('input-busqueda').value.toLowerCase().trim();
+      const textoUsuario = normalizarTexto(document.getElementById('input-busqueda').value);
       const contenedor = document.getElementById('contenedor-resultados');
 
       // Limpiar los resultados de la búsqueda anterior
       contenedor.innerHTML = "";
+      if (!textoUsuario) return;
       const todasLasNotas = await obtenerTodasLasNotas();
-      // Filtrado de las notas
-        const resultadosFiltrados = todasLasNotas.filter(nota => {
-        const tituloNota = nota.titulo ? nota.titulo.toLowerCase() : "";
-        const descNota = nota.descripcion ? nota.descripcion.toLowerCase() : "";
-        return tituloNota.includes(textoUsuario) ||
-          descNota.includes(textoUsuario) ||
-          nota.keys.some(key => textoUsuario.includes(key) || key.includes(textoUsuario));
-      });
+      const terminos = textoUsuario.split(/\s+/);
+      const resultadosFiltrados = todasLasNotas
+        .map((nota, indice) => {
+          const tituloNota = normalizarTexto(nota.titulo);
+          const descNota = normalizarTexto(nota.descripcion);
+          const etiquetas = Array.isArray(nota.keys) ? nota.keys.map(normalizarTexto) : [];
+          const campos = [tituloNota, descNota, ...etiquetas];
+          const coincide = terminos.every(termino =>
+            campos.some(campo => campo.includes(termino))
+          );
+          if (!coincide) return null;
+
+          let puntuacion = 0;
+          if (tituloNota === textoUsuario) puntuacion += 10;
+          else if (tituloNota.includes(textoUsuario)) puntuacion += 6;
+          if (etiquetas.some(etiqueta => etiqueta.includes(textoUsuario))) puntuacion += 4;
+          if (descNota.includes(textoUsuario)) puntuacion += 2;
+          terminos.forEach(termino => {
+            if (tituloNota.includes(termino)) puntuacion += 3;
+            if (etiquetas.some(etiqueta => etiqueta.includes(termino))) puntuacion += 2;
+            if (descNota.includes(termino)) puntuacion += 1;
+          });
+          return { nota, indice, puntuacion };
+        })
+        .filter(resultado => resultado !== null)
+        .sort((a, b) => b.puntuacion - a.puntuacion || a.indice - b.indice);
       // Si no hay resultados
       if (resultadosFiltrados.length === 0) {
         contenedor.innerHTML = "<p class='sin-resultados'>No se encontraron métodos relacionados.</p>";
         return;
       }
+      const resumen = document.createElement('p');
+      resumen.classList.add('ayuda-buscador');
+      resumen.textContent = `${resultadosFiltrados.length} resultado${resultadosFiltrados.length === 1 ? '' : 's'} encontrado${resultadosFiltrados.length === 1 ? '' : 's'}.`;
+      contenedor.appendChild(resumen);
       // Descripción
-      resultadosFiltrados.forEach(nota => {
+      resultadosFiltrados.forEach(({ nota }) => {
         const elementoNota = document.createElement('div');
         elementoNota.classList.add('resultado-item');
         const tituloNota = document.createElement('h3');
@@ -128,20 +164,19 @@
         descNota.style.whiteSpace = "pre-wrap";
         elementoNota.appendChild(descNota);
         const keysNota = document.createElement('small');
-        keysNota.textContent = `Etiquetas: ${nota.keys.join(', ')}`;
+        keysNota.textContent = `Etiquetas: ${Array.isArray(nota.keys) ? nota.keys.join(', ') : ''}`;
         elementoNota.appendChild(keysNota);
         contenedor.appendChild(elementoNota);
       });
     });
     // BOTÓN
-    document.getElementById('btn-exportar').addEventListener('click', async function () {
-      // Obtenemos la lista
-      const todasLasNotas = await obtenerTodasLasNotas();
+    document.getElementById('btn-exportar').addEventListener('click', function () {
+      const notasLocales = JSON.parse(localStorage.getItem('misNotasCreadas')) || [];
       // Conversión
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(todasLasNotas, null, 2));
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(notasLocales, null, 2));
       const descargarAncla = document.createElement('a');
       descargarAncla.setAttribute("href", dataStr);
-      descargarAncla.setAttribute("download", "notas.json");
+      descargarAncla.setAttribute("download", "mis-notas.json");
       document.body.appendChild(descargarAncla);
       descargarAncla.click();
       descargarAncla.remove();
