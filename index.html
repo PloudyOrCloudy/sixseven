@@ -40,6 +40,11 @@
       <!-- Aquí se pintan los resultados -->
       <div id="contenedor-resultados"></div>
     </section>
+    <section>
+      <button id="btn-exportar" style="background-color: #ff9800; color: white; border: none; padding: 10px; font-weight: bold; cursor: pointer; border-radius: 4px; margin-top: 10px; width: 100%;">
+      Exportar todas las notas a un archivo .json
+      </button>
+    </section>
   </main>
   <script>
     const qwe = "Python";
@@ -109,7 +114,6 @@
         contenedor.innerHTML = "<p class='sin-resultados'>No se encontraron métodos relacionados.</p>";
         return;
       }
-
       resultadosFiltrados.forEach(nota => {
         const elementoNota = document.createElement('div');
         elementoNota.classList.add('resultado-item');
@@ -123,6 +127,23 @@
         contenedor.appendChild(elementoNota);
       });
     });
+    // BOTÓN PARA DESCARGAR TODAS LAS NOTAS EN UN ARCHIVO REAL
+    document.getElementById('btn-exportar').addEventListener('click', async function() {
+  // Obtenemos la lista completa combinada (fijas + tus notas creadas en la web)
+  const todasLasNotas = await obtenerTodasLasNotas();
+  
+  // Convertimos el objeto de JavaScript a texto limpio en formato JSON
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(todasLasNotas, null, 2));
+  
+  // Creamos un enlace invisible para forzar la descarga del archivo
+  const descargarAncla = document.createElement('a');
+  descargarAncla.setAttribute("href", dataStr);
+  descargarAncla.setAttribute("download", "notas.json"); // Nombre del archivo que se descargará
+  
+  document.body.appendChild(descargarAncla);
+  descargarAncla.click();
+  descargarAncla.remove();
+  });
   </script>
 </body>
 </html>
