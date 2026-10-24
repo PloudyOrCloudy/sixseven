@@ -32,56 +32,56 @@
   },
   {
     "nombre": ":only-child",
-    "descripcion": "Selecciona un elemento que es el único hijo de su padre.",
+    "descripcion": "selecciona y aplica estilos a un elemento cuando es el único hijo de su elemento padre, es equivalente a escribir :first-child:last-child o :nth-child(1):nth-last-child(1) (es decir, cuando no tiene hermanos en ese mismo nivel, no hay dos elementos en un mismo div).",
     "keys": [
       "only",
       "child",
-      "selector",
+      "css",
       "pseudoclase"
     ]
   },
   {
     "nombre": ":nth-child(n)",
-    "descripcion": "Selecciona el hijo situado en la posición n.",
+    "descripcion": "Selecciona al elemento hijo situado en la posición n.",
     "keys": [
       "nth",
       "child",
       "n",
-      "selector",
+      "css",
       "pseudoclase"
     ]
   },
   {
     "nombre": ":nth-last-child(n)",
-    "descripcion": "Selecciona el hijo situado en la posición n contando desde el final.",
+    "descripcion": "Selecciona al elemento hijo situado en la posición n contando desde el final.",
     "keys": [
       "nth",
       "last",
       "child",
       "n",
-      "selector",
+      "css",
       "pseudoclase"
     ]
   },
   {
     "nombre": ":first-of-type",
-    "descripcion": "Selecciona el primer hermano de su mismo tipo.",
+    "descripcion": "Selecciona al primer elemento hermano de su mismo tipo.",
     "keys": [
       "first",
       "of",
       "type",
-      "selector",
+      "css",
       "pseudoclase"
     ]
   },
   {
     "nombre": ":last-of-type",
-    "descripcion": "Selecciona el último hermano de su mismo tipo.",
+    "descripcion": "Selecciona el último elmento hermano de su mismo tipo.",
     "keys": [
       "last",
       "of",
       "type",
-      "selector",
+      "css",
       "pseudoclase"
     ]
   },
@@ -92,7 +92,7 @@
       "only",
       "of",
       "type",
-      "selector",
+      "css",
       "pseudoclase"
     ]
   },
@@ -104,7 +104,7 @@
       "of",
       "type",
       "n",
-      "selector",
+      "css",
       "pseudoclase"
     ]
   },
@@ -117,7 +117,7 @@
       "of",
       "type",
       "n",
-      "selector",
+      "css",
       "pseudoclase"
     ]
   },
@@ -126,7 +126,7 @@
     "descripcion": "Selecciona elementos según el idioma especificado.",
     "keys": [
       "lang",
-      "selector",
+      "css",
       "pseudoclase"
     ]
   },
@@ -135,7 +135,7 @@
     "descripcion": "Selecciona controles de formulario deshabilitados.",
     "keys": [
       "disabled",
-      "selector",
+      "css",
       "pseudoclase"
     ]
   },
@@ -144,7 +144,7 @@
     "descripcion": "Selecciona controles de formulario habilitados.",
     "keys": [
       "enabled",
-      "selector",
+      "css",
       "pseudoclase"
     ]
   },
@@ -153,16 +153,7 @@
     "descripcion": "Selecciona controles de formulario marcados.",
     "keys": [
       "checked",
-      "selector",
-      "pseudoclase"
-    ]
-  },
-  {
-    "nombre": ":selection",
-    "descripcion": "Representa la parte del documento seleccionada por el usuario en la guía CSS3.",
-    "keys": [
-      "selection",
-      "selector",
+      "css",
       "pseudoclase"
     ]
   }
