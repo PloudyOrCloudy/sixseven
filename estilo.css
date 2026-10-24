@@ -82,6 +82,11 @@ h2 {
   font-size: 14px;
   overflow-x: auto;
 }
+.ayuda-buscador {
+  margin: 10px 0 0;
+  color: #f0f0f0;
+  font-size: 14px;
+}
 *{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   background-color: #333;
@@ -138,10 +143,10 @@ body::after {
 }
 @keyframes pumpkin-drift {
   from {
-    translate: 0 -8px;
+    top: calc(50% - 8px);
   }
   to {
-    translate: 0 8px;
+    top: calc(50% + 8px);
   }
 }
 @media (max-width: 640px) {
