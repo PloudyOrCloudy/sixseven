@@ -6,15 +6,15 @@ body {
   color: #333;
 }
 h2 {
-  color: #004999;
+  text-align: center;
+  color: #c7a478;
 }
-/* Estilos del formulario de inserción */
 #formulario-guardar {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: #fdfdfd;
-  border: 1px solid #e0e0e0;
+  background: #807340;
+  border: 1px solid #271a1a;
   padding: 20px;
   border-radius: 8px;
 }
@@ -30,8 +30,8 @@ h2 {
   height: 80px;
 }
 #formulario-guardar button {
-  background-color: #28a745;
-  color: white;
+  background-color: #ced1b6;
+  color: rgb(112, 63, 6);
   border: none;
   padding: 12px;
   font-weight: bold;
@@ -39,7 +39,7 @@ h2 {
   border-radius: 4px;
 }
 #formulario-guardar button:hover {
-  background-color: #218838;
+  background-color: #6e1539;
 }
 .search-box {
   display: flex;
@@ -53,7 +53,7 @@ h2 {
   border-radius: 4px;
 }
 .search-box button {
-  background-color: #0066cc;
+  background-color: #5c0909;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -61,18 +61,92 @@ h2 {
   border-radius: 4px;
 }
 .resultado-item {
-  background-color: #f4f7f6;
-  border-left: 5px solid #0066cc;
+  background-color: #fff4df;
+  color: #2b1b12;
+  border-left: 5px solid #d97706;
   padding: 15px;
   margin-top: 15px;
   border-radius: 4px;
 }
+.resultado-item h3,
+.resultado-item small {
+  background-color: transparent;
+  color: #2b1b12;
+}
 .resultado-item p {
-  background-color: #272822;
-  color: #f8f8f2;
+  background-color: #f5e4c3;
+  color: #2b1b12;
   padding: 12px;
   border-radius: 4px;
   font-family: 'Courier New', Courier, monospace;
   font-size: 14px;
   overflow-x: auto;
+}
+*{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background-color: #333;
+}
+#formulario-login form {
+  align-items: center;
+}
+#formulario-login {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+#formulario-login button {
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 4px;
+  background-color: #ced1b6;
+  color: rgb(112, 63, 6);
+  cursor: pointer;
+}
+body::before,
+body::after {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  overflow: hidden;
+  width: 32px;
+  color: #f0b44d;
+  font-size: 20px;
+  line-height: 1.5;
+  text-align: center;
+  white-space: pre-line;
+  pointer-events: none;
+  animation: pumpkin-drift 5s ease-in-out infinite alternate;
+}
+body::before {
+  left: 4px;
+  content: "🎃\A🎃\A🎃\A🎃\A🎃\A🎃\A🎃\A🎃";
+}
+body::after {
+  right: 4px;
+  content: "🎃\A🎃\A🎃\A🎃\A🎃\A🎃\A🎃\A🎃";
+  animation-delay: -2.5s;
+}
+@keyframes pumpkin-drift {
+  from {
+    translate: 0 -8px;
+  }
+  to {
+    translate: 0 8px;
+  }
+}
+@media (max-width: 640px) {
+  body::before,
+  body::after {
+    width: 20px;
+    font-size: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after {
+    animation: none;
+  }
 }

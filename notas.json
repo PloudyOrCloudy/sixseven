@@ -31,7 +31,7 @@
     ]
   },
   {
-    "nombre": ":only-child",
+    "titulo": ":only-child",
     "descripcion": "selecciona y aplica estilos a un elemento cuando es el único hijo de su elemento padre, es equivalente a escribir :first-child:last-child o :nth-child(1):nth-last-child(1) (es decir, cuando no tiene hermanos en ese mismo nivel, no hay dos elementos en un mismo div).",
     "keys": [
       "only",
@@ -41,7 +41,7 @@
     ]
   },
   {
-    "nombre": ":nth-child(n)",
+    "titulo": ":nth-child(n)",
     "descripcion": "Selecciona al elemento hijo situado en la posición n.",
     "keys": [
       "nth",
@@ -52,7 +52,7 @@
     ]
   },
   {
-    "nombre": ":nth-last-child(n)",
+    "titulo": ":nth-last-child(n)",
     "descripcion": "Selecciona al elemento hijo situado en la posición n contando desde el final.",
     "keys": [
       "nth",
@@ -64,7 +64,7 @@
     ]
   },
   {
-    "nombre": ":first-of-type",
+    "titulo": ":first-of-type",
     "descripcion": "Selecciona al primer elemento hermano de su mismo tipo.",
     "keys": [
       "first",
@@ -75,7 +75,7 @@
     ]
   },
   {
-    "nombre": ":last-of-type",
+    "titulo": ":last-of-type",
     "descripcion": "Selecciona el último elmento hermano de su mismo tipo.",
     "keys": [
       "last",
@@ -86,7 +86,7 @@
     ]
   },
   {
-    "nombre": ":only-of-type",
+    "titulo": ":only-of-type",
     "descripcion": "Selecciona un elemento que es el único de su tipo entre sus hermanos.",
     "keys": [
       "only",
@@ -97,7 +97,7 @@
     ]
   },
   {
-    "nombre": ":nth-of-type(n)",
+    "titulo": ":nth-of-type(n)",
     "descripcion": "Selecciona el elemento situado en la posición n entre los hermanos de su mismo tipo.",
     "keys": [
       "nth",
@@ -109,7 +109,7 @@
     ]
   },
   {
-    "nombre": ":nth-last-of-type(n)",
+    "titulo": ":nth-last-of-type(n)",
     "descripcion": "Selecciona el elemento situado en la posición n desde el final entre los hermanos de su tipo.",
     "keys": [
       "nth",
@@ -122,7 +122,7 @@
     ]
   },
   {
-    "nombre": ":lang",
+    "titulo": ":lang",
     "descripcion": "Selecciona elementos según el idioma especificado.",
     "keys": [
       "lang",
@@ -131,7 +131,7 @@
     ]
   },
   {
-    "nombre": ":disabled",
+    "titulo": ":disabled",
     "descripcion": "Selecciona controles de formulario deshabilitados.",
     "keys": [
       "disabled",
@@ -140,7 +140,7 @@
     ]
   },
   {
-    "nombre": ":enabled",
+    "titulo": ":enabled",
     "descripcion": "Selecciona controles de formulario habilitados.",
     "keys": [
       "enabled",
@@ -149,10 +149,21 @@
     ]
   },
   {
-    "nombre": ":checked",
+    "titulo": ":checked",
     "descripcion": "Selecciona controles de formulario marcados.",
     "keys": [
       "checked",
+      "css",
+      "pseudoclase"
+    ]
+  }
+  {
+    "titulo": "font-family",
+    "descripcion": "Cambia la fuente de las letras.",
+    "keys": [
+      "letra",
+      "estilo",
+      "fuente",
       "css",
       "pseudoclase"
     ]
