@@ -2,11 +2,32 @@
   {
     "titulo": "Propiedad 'color' en CSS",
     "descripcion": "Cambia el color del texto. Ejemplo: color: red;",
-    "keys": ["color", "cambiar color", "texto", "css"]
+    "keys": [
+      "color",
+      "cambiar color",
+      "texto",
+      "css"
+    ]
   },
   {
     "titulo": "Etiqueta <a> en HTML",
     "descripcion": "Crea un enlace a otra página web. Ejemplo: <a href='url'>Texto</a>",
-    "keys": ["enlace", "link", "url", "html"]
+    "keys": [
+      "enlace",
+      "link",
+      "url",
+      "html"
+    ]
+  },
+  {
+    "titulo": "Boton_NoDesapareceForzadoDeGifs",
+    "descripcion": "<script>\nconst gif = document.getElementById(\"alcalino-gif\");\nconst fotograma = document.getElementById(\"alcalino-fotograma\");\nconst contexto = fotograma.getContext(\"2d\");\nconst controlGif = document.getElementById(\"alcalino-control\");\n\nfunction habilitarControl() {\n\tcontrolGif.disabled = false;\n}\n\ngif.addEventListener(\"load\", habilitarControl);\nif (gif.complete && gif.naturalWidth > 0) habilitarControl();\n\n    controlGif.addEventListener(\"click\", () => {\n\tconst pausado = controlGif.getAttribute(\"aria-pressed\") ===  \n        \"true\";\n     if (pausado) {\n\tfotograma.hidden = true;\n\tgif.hidden = false;\n\tcontrolGif.innerHTML = \"&#9208;\";\n\t\t\t\t\t   \n      controlGif.setAttribute(\"aria-label\", \"Pausar animación\");\n       controlGif.title = \"Pausar animación\";\n\t\t\t\t\t  \n         controlGif.setAttribute(\"aria-pressed\", \"false\");\n \treturn;\n\t}\n\n\tfotograma.width = gif.naturalWidth;\n\tfotograma.height = gif.naturalHeight;\n\tcontexto.drawImage(gif, 0, 0);\n\tgif.hidden = true;\n\tfotograma.hidden = false;\n\tcontrolGif.textContent = \"▶\";\n\tcontrolGif.setAttribute(\"aria-label\", \"Reanudar \n        Animación\");controlGif.title = \"Reanudar animación\";\n         controlGif.setAttribute(\"aria-pressed\", \"true\");\n});\n</script>",
+    "keys": [
+      "parar videos",
+      "parar gifs",
+      "parar",
+      "gifs",
+      "videos"
+    ]
   }
 ]
