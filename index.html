@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Mi Glosario de Programación</title>
   <link rel="stylesheet" href="estilo.css">
 </head>
+
 <body>
   <!-- PANTALLA DE ACCESO (Esto es lo único que se ve al cargar la página) -->
   <section id="pantalla-login" class="seccion-login">
-    <h2>Sistema Protegido</h2>
-    <p>Introduce la clave para acceder a tus apuntes:</p>
+    <h2>Dame la contraseña pookieee, I LOV: </h2>
     <form id="formulario-login">
       <input type="password" id="clave-acceso" placeholder="Escribe la clave aquí..." required>
       <button type="submit">Entrar</button>
@@ -23,8 +24,9 @@
       <h2>Añadir Nuevo Apunte</h2>
       <form id="formulario-guardar">
         <input type="text" id="nuevo-titulo" placeholder="Título (Ej: Centrar Div)" required>
-        <textarea id="nueva-descripcion" placeholder="Descripción o código de ejemplo..." required></textarea>
-        <input type="text" id="nuevas-keys" placeholder="Palabras clave (separadas por comas. Ej: flexbox, centrar, css)" required>
+        <textarea id="nueva-descripcion" placeholder="¿Para que se utiliza este método?" required></textarea>
+        <input type="text" id="nuevas-keys"
+          placeholder="Palabras clave (separadas por comas. Ej: flexbox, centrar, css)" required>
         <button type="submit">Guardar en mis notas</button>
       </form>
     </section>
@@ -36,14 +38,20 @@
         <input type="search" id="input-busqueda" placeholder="¿Qué quieres hacer? Ej: cambiar color..." required>
         <button type="submit">Buscar</button>
       </form>
-      
+
       <!-- Aquí se pintan los resultados -->
       <div id="contenedor-resultados"></div>
+    </section>
+    <section>
+      <button id="btn-exportar"
+        style="background-color: #ff9800; color: white; border: none; padding: 10px; font-weight: bold; cursor: pointer; border-radius: 4px; margin-top: 10px; width: 100%;">
+        Exportar todas las notas a un archivo .json
+      </button>
     </section>
   </main>
   <script>
     const qwe = "Python";
-    document.getElementById('formulario-login').addEventListener('submit', function(event) {
+    document.getElementById('formulario-login').addEventListener('submit', function (event) {
       event.preventDefault();
       const claveIntroducida = document.getElementById('clave-acceso').value;
       const loginBox = document.getElementById('pantalla-login');
@@ -62,7 +70,7 @@
       try {
         const respuesta = await fetch('notas.json');
         const notasPredeterminadas = await respuesta.json();
-        
+
         const notasCreadas = JSON.parse(localStorage.getItem('misNotasCreadas')) || [];
         return [...notasPredeterminadas, ...notasCreadas];
       } catch (error) {
@@ -71,7 +79,7 @@
       }
     }
     // 3. LÓGICA PARA GUARDAR UNA NUEVA NOTA
-    document.getElementById('formulario-guardar').addEventListener('submit', function(event) {
+    document.getElementById('formulario-guardar').addEventListener('submit', function (event) {
       event.preventDefault();
       const titulo = document.getElementById('nuevo-titulo').value.trim();
       const descripcion = document.getElementById('nueva-descripcion').value.trim();
@@ -88,41 +96,76 @@
       document.getElementById('formulario-guardar').reset();
       alert('¡Apunte guardado con éxito!');
     });
-    // 4. LÓGICA DEL BUSCADOR ASÍNCRONO
-    document.getElementById('buscador-notas').addEventListener('submit', async function(event) {
-      event.preventDefault();
+    // 4. LÓGICA DEL BUSCADOR
+    document.getElementById('buscador-notas').addEventListener('submit', async function (event) {
       
+      event.preventDefault();
+
       const textoUsuario = document.getElementById('input-busqueda').value.toLowerCase().trim();
       const contenedor = document.getElementById('contenedor-resultados');
-      
-      contenedor.innerHTML = ""; 
+
+      // Limpiar los resultados de la búsqueda anterior
+      contenedor.innerHTML = "";
 
       const todasLasNotas = await obtenerTodasLasNotas();
 
+      // Filtrado de las notas
       const resultadosFiltrados = todasLasNotas.filter(nota => {
-        return nota.titulo.toLowerCase().includes(textoUsuario) || 
-               nota.descripcion.toLowerCase().includes(textoUsuario) ||
-               nota.keys.some(key => textoUsuario.includes(key) || key.includes(textoUsuario));
+        const tituloNota = nota.titulo ? nota.titulo.toLowerCase() : "";
+        const descNota = nota.descripcion ? nota.descripcion.toLowerCase() : "";
+
+        return tituloNota.includes(textoUsuario) ||
+          descNota.includes(textoUsuario) ||
+          nota.keys.some(key => textoUsuario.includes(key) || key.includes(textoUsuario));
       });
 
+      // Si no hay resultados
       if (resultadosFiltrados.length === 0) {
         contenedor.innerHTML = "<p class='sin-resultados'>No se encontraron métodos relacionados.</p>";
         return;
       }
 
+      // Pintar los resultados
       resultadosFiltrados.forEach(nota => {
         const elementoNota = document.createElement('div');
         elementoNota.classList.add('resultado-item');
-        
-        elementoNota.innerHTML = `
-          <h3>${nota.titulo}</h3>
-          <p>${nota.descripcion}</p>
-          <small>Etiquetas: ${nota.keys.join(', ')}</small>
-        `;
-        
+
+        // 1. Título
+        const tituloNota = document.createElement('h3');
+        tituloNota.textContent = nota.titulo;
+        elementoNota.appendChild(tituloNota);
+
+        // 2. Descripción
+        const descNota = document.createElement('p');
+        descNota.textContent = nota.descripcion || 'Sin descripción disponible';
+        descNota.style.whiteSpace = "pre-wrap";
+        elementoNota.appendChild(descNota);
+
+        // 3. Etiquetas
+        const keysNota = document.createElement('small');
+        keysNota.textContent = `Etiquetas: ${nota.keys.join(', ')}`;
+        elementoNota.appendChild(keysNota);
+
         contenedor.appendChild(elementoNota);
       });
     });
+    // BOTÓN
+    document.getElementById('btn-exportar').addEventListener('click', async function () {
+
+      const todasLasNotas = await obtenerTodasLasNotas();
+
+      // Conversion
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(todasLasNotas, null, 2));
+
+      const descargarAncla = document.createElement('a');
+      descargarAncla.setAttribute("href", dataStr);
+      descargarAncla.setAttribute("download", "notas.json"); 
+      
+      document.body.appendChild(descargarAncla);
+      descargarAncla.click();
+      descargarAncla.remove();
+    });
   </script>
 </body>
+
 </html>

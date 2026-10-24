@@ -67,3 +67,12 @@ h2 {
   margin-top: 15px;
   border-radius: 4px;
 }
+.resultado-item p {
+  background-color: #272822;
+  color: #f8f8f2;
+  padding: 12px;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  overflow-x: auto;
+}
