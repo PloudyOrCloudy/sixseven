@@ -29,5 +29,141 @@
       "gifs",
       "videos"
     ]
+  },
+  {
+    "nombre": ":only-child",
+    "descripcion": "Selecciona un elemento que es el único hijo de su padre.",
+    "keys": [
+      "only",
+      "child",
+      "selector",
+      "pseudoclase"
+    ]
+  },
+  {
+    "nombre": ":nth-child(n)",
+    "descripcion": "Selecciona el hijo situado en la posición n.",
+    "keys": [
+      "nth",
+      "child",
+      "n",
+      "selector",
+      "pseudoclase"
+    ]
+  },
+  {
+    "nombre": ":nth-last-child(n)",
+    "descripcion": "Selecciona el hijo situado en la posición n contando desde el final.",
+    "keys": [
+      "nth",
+      "last",
+      "child",
+      "n",
+      "selector",
+      "pseudoclase"
+    ]
+  },
+  {
+    "nombre": ":first-of-type",
+    "descripcion": "Selecciona el primer hermano de su mismo tipo.",
+    "keys": [
+      "first",
+      "of",
+      "type",
+      "selector",
+      "pseudoclase"
+    ]
+  },
+  {
+    "nombre": ":last-of-type",
+    "descripcion": "Selecciona el último hermano de su mismo tipo.",
+    "keys": [
+      "last",
+      "of",
+      "type",
+      "selector",
+      "pseudoclase"
+    ]
+  },
+  {
+    "nombre": ":only-of-type",
+    "descripcion": "Selecciona un elemento que es el único de su tipo entre sus hermanos.",
+    "keys": [
+      "only",
+      "of",
+      "type",
+      "selector",
+      "pseudoclase"
+    ]
+  },
+  {
+    "nombre": ":nth-of-type(n)",
+    "descripcion": "Selecciona el elemento situado en la posición n entre los hermanos de su mismo tipo.",
+    "keys": [
+      "nth",
+      "of",
+      "type",
+      "n",
+      "selector",
+      "pseudoclase"
+    ]
+  },
+  {
+    "nombre": ":nth-last-of-type(n)",
+    "descripcion": "Selecciona el elemento situado en la posición n desde el final entre los hermanos de su tipo.",
+    "keys": [
+      "nth",
+      "last",
+      "of",
+      "type",
+      "n",
+      "selector",
+      "pseudoclase"
+    ]
+  },
+  {
+    "nombre": ":lang",
+    "descripcion": "Selecciona elementos según el idioma especificado.",
+    "keys": [
+      "lang",
+      "selector",
+      "pseudoclase"
+    ]
+  },
+  {
+    "nombre": ":disabled",
+    "descripcion": "Selecciona controles de formulario deshabilitados.",
+    "keys": [
+      "disabled",
+      "selector",
+      "pseudoclase"
+    ]
+  },
+  {
+    "nombre": ":enabled",
+    "descripcion": "Selecciona controles de formulario habilitados.",
+    "keys": [
+      "enabled",
+      "selector",
+      "pseudoclase"
+    ]
+  },
+  {
+    "nombre": ":checked",
+    "descripcion": "Selecciona controles de formulario marcados.",
+    "keys": [
+      "checked",
+      "selector",
+      "pseudoclase"
+    ]
+  },
+  {
+    "nombre": ":selection",
+    "descripcion": "Representa la parte del documento seleccionada por el usuario en la guía CSS3.",
+    "keys": [
+      "selection",
+      "selector",
+      "pseudoclase"
+    ]
   }
 ]
