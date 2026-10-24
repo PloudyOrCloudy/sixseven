@@ -1,0 +1,12 @@
+[
+  {
+    "titulo": "Propiedad 'color' en CSS",
+    "descripcion": "Cambia el color del texto. Ejemplo: color: red;",
+    "keys": ["color", "cambiar color", "texto", "css"]
+  },
+  {
+    "titulo": "Etiqueta <a> en HTML",
+    "descripcion": "Crea un enlace a otra página web. Ejemplo: <a href='url'>Texto</a>",
+    "keys": ["enlace", "link", "url", "html"]
+  }
+]

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi Glosario de Programación</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+  <!-- SECCIÓN 1: FORMULARIO PARA AÑADIR NOTAS -->
+  <section class="seccion-formulario">
+    <h2>Añadir Nuevo Apunte</h2>
+    <form id="formulario-guardar">
+      <input type="text" id="nuevo-titulo" placeholder="Título (Ej: Centrar Div)" required>
+      <textarea id="nueva-descripcion" placeholder="Descripción o código de ejemplo..." required></textarea>
+      <input type="text" id="nuevas-keys" placeholder="Palabras clave (separadas por comas. Ej: flexbox, centrar, css)" required>
+      <button type="submit">Guardar en mis notas</button>
+    </form>
+  </section>
+
+  <hr>
+
+  <!-- SECCIÓN 2: BUSCADOR -->
+  <section class="seccion-buscador">
+    <h2>Buscador de Métodos</h2>
+    <form id="buscador-notas" class="search-box">
+      <input type="search" id="input-busqueda" placeholder="¿Qué quieres hacer? Ej: cambiar color..." required>
+      <button type="submit">Buscar</button>
+    </form>
+    
+    <!-- Aquí se pintan los resultados -->
+    <div id="contenedor-resultados"></div>
+  </section>
+
+  <script>
+    // 1. TUS NOTAS FIJAS (Las que vienen por defecto)
+    const notasPredeterminadas = [
+      {
+        titulo: "Propiedad 'color' en CSS",
+        descripcion: "Cambia el color del texto. Ejemplo: color: red;",
+        keys: ["color", "cambiar color", "texto", "css"]
+      },
+      {
+        titulo: "Etiqueta <a> en HTML",
+        descripcion: "Crea un enlace a otra página web. Ejemplo: <a href='url'>Texto</a>",
+        keys: ["enlace", "link", "url", "html"]
+      }
+    ];
+    // 2. FUNCIÓN PARA OBTENER TODAS LA NOTAS (Predeterminadas + Creadas por ti)
+    function obtenerTodasLasNotas() {
+      // Intentamos recuperar las notas guardadas por el usuario en el navegador
+      const notasCreadas = JSON.parse(localStorage.getItem('misNotasCreadas')) || [];
+      // Unimos la lista fija con la lista dinámica del usuario
+      return [...notasPredeterminadas, ...notasCreadas];
+    }
+    // 3. LÓGICA PARA GUARDAR UNA NUEVA NOTA DESDE LA PÁGINA
+    document.getElementById('formulario-guardar').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const titulo = document.getElementById('nuevo-titulo').value.trim();
+      const descripcion = document.getElementById('nueva-descripcion').value.trim();
+      // Convertimos el texto de las keys en un array limpio de espacios y en minúsculas
+      const keysTexto = document.getElementById('nuevas-keys').value;
+      const keysArray = keysTexto.split(',').map(key => key.trim().toLowerCase());
+      // Creamos el nuevo objeto nota
+      const nuevaNota = {
+        titulo: titulo,
+        descripcion: descripcion,
+        keys: keysArray
+      };
+      // Traemos las notas que ya había guardado el usuario anteriormente, sumamos la nueva y actualizamos
+      const notasCreadasActuales = JSON.parse(localStorage.getItem('misNotasCreadas')) || [];
+      notasCreadasActuales.push(nuevaNota);
+      localStorage.setItem('misNotasCreadas', JSON.stringify(notasCreadasActuales));
+      // Limpiamos los campos del formulario y avisamos
+      document.getElementById('formulario-guardar').reset();
+      alert('¡Apunte guardado con éxito!');
+    });
+    // 4. LÓGICA DEL BUSCADOR (Busca en toda la lista combinada)
+    document.getElementById('buscador-notas').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const textoUsuario = document.getElementById('input-busqueda').value.toLowerCase().trim();
+      const contenedor = document.getElementById('contenedor-resultados');
+      contenedor.innerHTML = ""; // Limpiar pantalla
+      // Obtenemos la lista completa actualizada
+      const todasLasNotas = obtenerTodasLasNotas();
+      // Filtrado inteligente
+      const resultadosFiltrados = todasLasNotas.filter(nota => {
+        return nota.titulo.toLowerCase().includes(textoUsuario) || 
+               nota.descripcion.toLowerCase().includes(textoUsuario) ||
+               nota.keys.some(key => textoUsuario.includes(key) || key.includes(textoUsuario));
+      });
+      // Mostrar en el HTML
+      if (resultadosFiltrados.length === 0) {
+        contenedor.innerHTML = "<p class='sin-resultados'>No se encontraron métodos relacionados.</p>";
+        return;
+      }
+      resultadosFiltrados.forEach(nota => {
+        const elementoNota = document.createElement('div');
+        elementoNota.classList.add('resultado-item');
+        elementoNota.innerHTML = `
+          <h3>${nota.titulo}</h3>
+          <p>${nota.descripcion}</p>
+          <small>Etiquetas: ${nota.keys.join(', ')}</small>
+        `;
+        contenedor.appendChild(elementoNota);
+      });
+    });
+  </script>
+</body>
+</html>

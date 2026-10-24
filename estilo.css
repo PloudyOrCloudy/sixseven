@@ -1,0 +1,80 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+  color: #333;
+}
+
+h2 {
+  color: #004999;
+}
+
+/* Estilos del formulario de inserción */
+#formulario-guardar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #fdfdfd;
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+#formulario-guardar input, 
+#formulario-guardar textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+#formulario-guardar textarea {
+  resize: vertical;
+  height: 80px;
+}
+
+#formulario-guardar button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#formulario-guardar button:hover {
+  background-color: #218838;
+}
+
+/* Estilos de la zona del buscador y tarjetas */
+.search-box {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-box button {
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.resultado-item {
+  background-color: #f4f7f6;
+  border-left: 5px solid #0066cc;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 4px;
+}
