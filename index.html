@@ -98,9 +98,8 @@
     });
     // 4. LÓGICA DEL BUSCADOR
     document.getElementById('buscador-notas').addEventListener('submit', async function (event) {
-      
-      event.preventDefault();
 
+      event.preventDefault();
       const textoUsuario = document.getElementById('input-busqueda').value.toLowerCase().trim();
       const contenedor = document.getElementById('contenedor-resultados');
 
@@ -124,24 +123,20 @@
         contenedor.innerHTML = "<p class='sin-resultados'>No se encontraron métodos relacionados.</p>";
         return;
       }
-
-      // Pintar los resultados
+      // Descripción
       resultadosFiltrados.forEach(nota => {
         const elementoNota = document.createElement('div');
         elementoNota.classList.add('resultado-item');
 
-        // 1. Título
         const tituloNota = document.createElement('h3');
         tituloNota.textContent = nota.titulo;
         elementoNota.appendChild(tituloNota);
 
-        // 2. Descripción
         const descNota = document.createElement('p');
         descNota.textContent = nota.descripcion || 'Sin descripción disponible';
         descNota.style.whiteSpace = "pre-wrap";
         elementoNota.appendChild(descNota);
 
-        // 3. Etiquetas
         const keysNota = document.createElement('small');
         keysNota.textContent = `Etiquetas: ${nota.keys.join(', ')}`;
         elementoNota.appendChild(keysNota);
@@ -151,16 +146,16 @@
     });
     // BOTÓN
     document.getElementById('btn-exportar').addEventListener('click', async function () {
-
+      // Obtenemos la lista
       const todasLasNotas = await obtenerTodasLasNotas();
 
-      // Conversion
+      // Conversión
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(todasLasNotas, null, 2));
+
 
       const descargarAncla = document.createElement('a');
       descargarAncla.setAttribute("href", dataStr);
-      descargarAncla.setAttribute("download", "notas.json"); 
-      
+      descargarAncla.setAttribute("download", "notas.json");
       document.body.appendChild(descargarAncla);
       descargarAncla.click();
       descargarAncla.remove();
