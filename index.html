@@ -22,7 +22,6 @@
     </form>
     <p id="mensaje-error" style="color: red; display: none;">Calabaza incorrecta 😭</p>
   </section>
-
   <main id="contenido-protegido" style="display: none;">
     <!-- AÑADIR NOTAS  -->
     <section class="seccion-formulario">
@@ -108,11 +107,9 @@
     });
     // 4. LÓGICA DEL BUSCADOR
       document.getElementById('buscador-notas').addEventListener('submit', async function (event) {
-
       event.preventDefault();
       const textoUsuario = normalizarTexto(document.getElementById('input-busqueda').value);
       const contenedor = document.getElementById('contenedor-resultados');
-
       // Limpiar los resultados de la búsqueda anterior
       contenedor.innerHTML = "";
       if (!textoUsuario) return;
@@ -128,7 +125,6 @@
             campos.some(campo => campo.includes(termino))
           );
           if (!coincide) return null;
-
           let puntuacion = 0;
           if (tituloNota === textoUsuario) puntuacion += 10;
           else if (tituloNota.includes(textoUsuario)) puntuacion += 6;
@@ -152,22 +148,33 @@
       resumen.classList.add('ayuda-buscador');
       resumen.textContent = `${resultadosFiltrados.length} resultado${resultadosFiltrados.length === 1 ? '' : 's'} encontrado${resultadosFiltrados.length === 1 ? '' : 's'}.`;
       contenedor.appendChild(resumen);
-      // Descripción
-      resultadosFiltrados.forEach(({ nota }) => {
-        const elementoNota = document.createElement('div');
-        elementoNota.classList.add('resultado-item');
-        const tituloNota = document.createElement('h3');
-        tituloNota.textContent = nota.titulo;
-        elementoNota.appendChild(tituloNota);
-        const descNota = document.createElement('p');
-        descNota.textContent = nota.descripcion || 'Sin descripción disponible';
-        descNota.style.whiteSpace = "pre-wrap";
-        elementoNota.appendChild(descNota);
-        const keysNota = document.createElement('small');
-        keysNota.textContent = `Etiquetas: ${Array.isArray(nota.keys) ? nota.keys.join(', ') : ''}`;
-        elementoNota.appendChild(keysNota);
-        contenedor.appendChild(elementoNota);
+      const tabla = document.createElement('table');
+      tabla.classList.add('tabla-resultados');
+      const encabezado = document.createElement('thead');
+      const filaEncabezado = document.createElement('tr');
+      ['Método', 'Descripción', 'Palabras clave'].forEach(texto => {
+        const celda = document.createElement('th');
+        celda.scope = 'col';
+        celda.textContent = texto;
+        filaEncabezado.appendChild(celda);
       });
+      encabezado.appendChild(filaEncabezado);
+      tabla.appendChild(encabezado);
+      const cuerpo = document.createElement('tbody');
+      resultadosFiltrados.forEach(({ nota }) => {
+        const fila = document.createElement('tr');
+        const titulo = document.createElement('th');
+        titulo.scope = 'row';
+        titulo.textContent = nota.titulo || 'Sin título';
+        const descripcion = document.createElement('td');
+        descripcion.textContent = nota.descripcion || 'Sin descripción disponible';
+        const palabrasClave = document.createElement('td');
+        palabrasClave.textContent = Array.isArray(nota.keys) ? nota.keys.join(', ') : '';
+        fila.append(titulo, descripcion, palabrasClave);
+        cuerpo.appendChild(fila);
+      });
+      tabla.appendChild(cuerpo);
+      contenedor.appendChild(tabla);
     });
     // BOTÓN
     document.getElementById('btn-exportar').addEventListener('click', function () {

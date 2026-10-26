@@ -14,8 +14,13 @@
     "descripcion": "Crea un enlace a otra página web. Ejemplo: <a href='url'>Texto</a>",
     "keys": [
       "enlace",
+      "enlaces",
       "link",
       "url",
+      "hipervinculo",
+      "href",
+      "navegar",
+      "abrir pagina",
       "html"
     ]
   },
@@ -296,6 +301,81 @@
       "box model",
       "tamano",
       "padding",
+      "css"
+    ]
+  },
+  {
+    "titulo": "Insertar un video en HTML",
+    "descripcion": "La etiqueta <video> inserta un video en la página. El atributo controls muestra los controles de reproducción y <source> indica el archivo y su formato. Ejemplo: <video controls width='480'><source src='video.mp4' type='video/mp4'>Tu navegador no admite video.</video>",
+    "keys": [
+      "video",
+      "videos",
+      "insertar video",
+      "reproducir video",
+      "controles",
+      "source",
+      "html"
+    ]
+  },
+  {
+    "titulo": "Insertar audio en HTML",
+    "descripcion": "La etiqueta <audio> permite añadir sonido. Usa controls para que la persona pueda reproducirlo, pausarlo y ajustar el volumen; <source> define el archivo. Ejemplo: <audio controls><source src='audio.mp3' type='audio/mpeg'>Tu navegador no admite audio.</audio>. Los navegadores suelen bloquear la reproducción automática con sonido; es mejor iniciar la reproducción mediante los controles o una acción del usuario.",
+    "keys": [
+      "audio",
+      "sonido",
+      "insertar audio",
+      "reproducir audio",
+      "controles de audio",
+      "source",
+      "html"
+    ]
+  },
+  {
+    "titulo": "Detectar cuándo se reproduce un audio",
+    "descripcion": "El evento play se dispara cuando un audio empieza o continúa reproduciéndose. Puedes escucharlo con JavaScript para reaccionar a la reproducción. Ejemplo: const audio = document.querySelector('audio'); audio.addEventListener('play', () => { console.log('El audio se está reproduciendo'); });",
+    "keys": [
+      "audio",
+      "reproduccion",
+      "cuando se reproduce",
+      "audio cuando se reproduzcan",
+      "reproduzcan",
+      "evento play",
+      "play",
+      "addEventListener",
+      "javascript",
+      "html"
+    ]
+  },
+  {
+    "titulo": "Introducción a las tablas en HTML",
+    "descripcion": "Una tabla organiza datos en filas y columnas: <table> contiene la tabla, <tr> crea una fila, <th> una celda de encabezado y <td> una celda de datos. <thead> y <tbody> agrupan encabezados y contenido. Ejemplo: <table><thead><tr><th>Nombre</th><th>Edad</th></tr></thead><tbody><tr><td>Ana</td><td>20</td></tr></tbody></table>.",
+    "keys": [
+      "tabla",
+      "tablas",
+      "introduccion a tablas",
+      "filas",
+      "columnas",
+      "table",
+      "tr",
+      "th",
+      "td",
+      "thead",
+      "tbody",
+      "html"
+    ]
+  },
+  {
+    "titulo": "Dar estilo a tablas con CSS",
+    "descripcion": "CSS permite cambiar la apariencia de una tabla, sus celdas y encabezados. Por ejemplo, border-collapse: collapse; junta los bordes, padding añade espacio interior y text-align alinea el contenido. Ejemplo: table, th, td { border: 1px solid #333; } th, td { padding: 8px; }",
+    "keys": [
+      "tabla",
+      "tablas",
+      "estilo de tabla",
+      "bordes",
+      "celdas",
+      "border-collapse",
+      "padding",
+      "text-align",
       "css"
     ]
   }
